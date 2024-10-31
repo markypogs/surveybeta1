@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Survey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Courgette', cursive;
+            background-image: url('https://images.unsplash.com/photo-1510524261347-828b7de4e3b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fHZhbGVudGluZXxlbnwwfHx8fDE2Mzg2MzkzNzY&ixlib=rb-1.2.1&q=80&w=1080');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        form {
+            background: rgba(255, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        input[type="text"], input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: pink;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function submitSurvey() {
+            const name = document.getElementById('name').value;
+            const q1 = document.getElementById('q1').value;
+            const q2 = document.getElementById('q2').value;
+            const q3 = document.getElementById('q3').value;
+            const q4 = document.getElementById('q4').value;
+
+            const surveyData = { name, q1, q2, q3, q4 };
+            let submissions = JSON.parse(localStorage.getItem('submissions')) || [];
+            submissions.push(surveyData);
+            localStorage.setItem('submissions', JSON.stringify(submissions));
+
+            alert('Thank you po for answering');
+            document.getElementById('surveyForm').reset();
+        }
+    </script>
+</head>
+<body>
+    <h1>Valentine's Survey</h1>
+    <form id="surveyForm" onsubmit="event.preventDefault(); submitSurvey();">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br>
+
+        <label for="q1">Favorite person?:</label>
+        <input type="text" id="q1" required><br>
+
+        <label for="q2">Do you still love me po?:</label>
+        <input type="text" id="q2" required><br>
+
+        <label for="q3">Do you still like me po?:</label>
+        <input type="text" id="q3" required><br>
+
+        <label for="q4">Do you have anything to say to me po?:</label>
+        <input type="text" id="q4" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
